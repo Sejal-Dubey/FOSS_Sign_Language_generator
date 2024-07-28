@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+form {
+    margin: 20px;
+}
+
+#result {
+    margin-top: 20px;
+}
+
+img {
+    max-width: 500px;
+    height: auto;
+}

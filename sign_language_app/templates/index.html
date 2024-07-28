@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Helper</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{% static  "C:\Users\Sejal\Desktop\FOSS\sign_language_app\static\sign_language_image.jpg" %}'); /* Background image */
+            background-size: cover; /* Cover the entire page */
+            background-position: center; /* Center the image */
+            color: #fff; /* White text for contrast */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #fff;
+            margin-top: 20px;
+        }
+        form {
+            background: rgba(0, 0, 0, 0.7); /* Dark transparent background for the form */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #007BFF; /* Blue button */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        #result {
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+        }
+        #images-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .word {
+            margin-bottom: 20px;
+        }
+        .letter {
+            margin: 5px;
+        }
+        video {
+            width: 100%;
+            max-width: 600px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0 auto; /* Center the video horizontally */
+        }
+        .navbar {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .navbar a:hover {
+            background-color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="#about">About Me</a>
+    </div>
+    <h1>Sign Language Helper</h1>
+    <form id="text-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="video" accept="video/*" required>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="result">
+        <h2 id="loading-text" style="display: none;">Processing your video, please wait...</h2>
+        <h2>Output Video</h2>
+        <video id="output-video" controls style="display: none;">
+            <source id="output-video-source" src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h2>Generated Images</h2>
+        <div id="images-container"></div>
+    </div>
+    <script>
+        const form = document.getElementById('text-form');
+        const loadingText = document.getElementById('loading-text');
+        const outputVideo = document.getElementById('output-video');
+        
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            loadingText.style.display = 'block';
+            outputVideo.style.display = 'none';
+            
+            const formData = new FormData(form);
+            const response = await fetch('{% url "upload_video" %}', {
+                method: 'POST',
+                body: formData,
+            });
+            const data = await response.json();
+            loadingText.style.display = 'none';
+
+            if (response.ok) {
+                const imagesContainer = document.getElementById('images-container');
+                imagesContainer.innerHTML = ''; // Clear existing images
+
+                data.images.forEach(wordData => {
+                    const wordDiv = document.createElement('div');
+                    wordDiv.classList.add('word');
+                    const wordTitle = document.createElement('h3');
+                    wordTitle.innerText = `Word: ${wordData.word}`;
+                    wordDiv.appendChild(wordTitle);
+
+                    wordData.letters.forEach(letterData => {
+                        const letterDiv = document.createElement('div');
+                        letterDiv.classList.add('letter');
+
+                        const letterTitle = document.createElement('p');
+                        letterTitle.innerText = `Letter: ${letterData.char}`;
+                        letterDiv.appendChild(letterTitle);
+
+                        const img = document.createElement('img');
+                        img.src = letterData.image_url;
+                        img.alt = `Image for ${letterData.char}`;
+                        img.style.width = '128px';  // Adjust size if needed
+                        img.style.margin = '10px';  // Add spacing between images
+                        letterDiv.appendChild(img);
+
+                        wordDiv.appendChild(letterDiv);
+                    });
+
+                    imagesContainer.appendChild(wordDiv);
+                });
+
+                const outputVideoSource = document.getElementById('output-video-source');
+                outputVideoSource.src = data.output_video_url;
+                outputVideo.style.display = 'block';
+                outputVideo.load();
+            } else {
+                alert('Error uploading video');
+            }
+        });
+    </script>
+</body>
+</html>
