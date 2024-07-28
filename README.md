@@ -1,9 +1,9 @@
-# FOSS_Sign_Language_generator
-# Sign Language Helper
+# FOSS_Hackathon
+# Voice2Gesture
 
 ## Introduction
 
-Welcome to **Sign Language Helper**, a web application designed to make communication more inclusive. This tool converts spoken language in videos into sign language, providing visual representations of signs. Whether you're an educator, content creator, or learner, Sign Language Helper helps bridge the gap between hearing and non-hearing communities, making information accessible to everyone with ease.
+Welcome to **Voice2Gesture**, a web application designed to make communication more inclusive. This tool converts spoken language in videos into sign language, providing visual representations of signs. Whether you're an educator, content creator, or learner, Sign Language Helper helps bridge the gap between hearing and non-hearing communities, making information accessible to everyone with ease.
 
 ## Features
 
