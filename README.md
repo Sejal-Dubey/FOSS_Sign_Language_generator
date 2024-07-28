@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Sign Language Helper is a web application designed to assist in learning and understanding sign language. The application converts videos into sign language and provides visual representations of the signs.
+Welcome to **Sign Language Helper**, a web application designed to make communication more inclusive. This tool converts spoken language in videos into sign language, providing visual representations of signs. Whether you're an educator, content creator, or learner, Sign Language Helper helps bridge the gap between hearing and non-hearing communities, making information accessible to everyone with ease.
 
 ## Features
 
@@ -49,19 +49,26 @@ To run this project locally, follow these steps:
 
 ## Usage
 
-1. Open your web browser and go to `http://127.0.0.1:8000/`.
-2. Upload a video file.
-3. Wait for the processing to complete.
-4. View and download the processed video.
+1. **Open the Application:**
+Open your web browser and navigate to http://127.0.0.1:8000/.
+
+2. **Upload a Video:**
+Click on the upload button and select a video file in the video.mp4 format.
+
+3. **Processing the Video:**
+Once the video is uploaded, the application will start processing it. This involves several steps to extract and convert the audio to text, and then generate sign language images.
+
+4. **Viewing and Downloading:**
+After processing is complete, you can view the video with the sign language overlay directly in the browser. There will also be an option to download the processed video.
 
 ## How It Works
 
-1. Upload a Video: Start by uploading a video file in the video.mp4 format.
-2. Audio Extraction: Upon submission, the audio is extracted from the video using pydub.
-3. Speech-to-Text Conversion: The extracted audio is processed to convert speech to text using NLTK.
-4. Text Processing: The processed text is then fed into a trained model using TensorFlow and Keras.
-5. Sign Generation: The model generates corresponding sign language images for each word in the text.
-6. Video Overlay: These sign language images are overlaid onto the original video to display the signs along with the video.   
+1. **Upload a Video:** Start by uploading a video file in the video.mp4 format.
+2. **Audio Extraction:** Upon submission, the audio is extracted from the video using pydub.
+3. **Speech-to-Text Conversion:** The extracted audio is processed to convert speech to text using NLTK.
+4. **Text Processing:** The processed text is then fed into a trained model using TensorFlow and Keras.
+5. **Sign Generation:** The model generates corresponding sign language images for each word in the text.
+6. **Video Overlay:** These sign language images are overlaid onto the original video to display the signs along with the video.   
 
 ## Contributing
 
@@ -74,8 +81,9 @@ To run this project locally, follow these steps:
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License, which allows for open-source use, modification, and distribution.
+
 
 ## Video Demo
-
+For a visual demonstration of the Sign Language Helper in action, you can watch the video demo. This demo walks through the entire process from video upload to the final downloadable output, showcasing the application’s features and functionality.
 [Link to video demo](https://your-demo-video-link)
