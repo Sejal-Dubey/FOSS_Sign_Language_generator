@@ -54,6 +54,15 @@ To run this project locally, follow these steps:
 3. Wait for the processing to complete.
 4. View and download the processed video.
 
+## How It Works
+
+1. Upload a Video: Start by uploading a video file in the video.mp4 format.
+2. Audio Extraction: Upon submission, the audio is extracted from the video using pydub.
+3. Speech-to-Text Conversion: The extracted audio is processed to convert speech to text using NLTK.
+4. Text Processing: The processed text is then fed into a trained model using TensorFlow and Keras.
+5. Sign Generation: The model generates corresponding sign language images for each word in the text.
+6. Video Overlay: These sign language images are overlaid onto the original video to display the signs along with the video.   
+
 ## Contributing
 
 1. Fork the repository.
