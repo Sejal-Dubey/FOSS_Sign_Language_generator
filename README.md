@@ -1,4 +1,4 @@
-# FOSS_Hackathon
+## FOSS_Hackathon
 # Voice2Gesture
 
 ## Introduction
